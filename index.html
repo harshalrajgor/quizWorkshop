@@ -3,12 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pulse Check · Slalom QE Workshop</title>
+<title>Pulse Check Quiz · Slalom QE</title>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --navy:#1B2A4A;--navy2:#0D1E30;
-  --teal:#0D7A6E;--teal2:#085A51;--teal-lt:#E0F4F1;
+  --navy:#1B2A4A;--teal:#0D7A6E;--teal2:#085A51;--teal-lt:#E0F4F1;
   --amber:#BA7517;--amber-lt:#FEF3E0;
   --coral:#993C1D;--coral-lt:#FAECE7;
   --sage:#3B6D11;--sage-lt:#EAF3DE;
@@ -16,86 +15,102 @@
   --blue:#185FA5;--blue-lt:#E6F1FB;
   --border:#DDE3E9;--text:#18232E;--text2:#4A5A6A;--text3:#8A9AAA;
   --bg:#F4F7F9;--card:#FFFFFF;
-  --green-lt:#EAF3DE;--yellow-lt:#FAEEDA;--red-lt:#FAECE7;
+  --g-bg:#EAF3DE;--g-bdr:#97C459;--g-title:#1A4D0A;--g-sub:#3B6D11;--g-dot:#3B6D11;
+  --y-bg:#FAEEDA;--y-bdr:#EF9F27;--y-title:#52330A;--y-sub:#854F0B;--y-dot:#BA7517;
+  --r-bg:#FAECE7;--r-bdr:#D85A30;--r-title:#6B1D0A;--r-sub:#993C1D;--r-dot:#A32D2D;
 }
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;padding:1rem .75rem 3rem;line-height:1.5}
 .wrap{max-width:640px;margin:0 auto}
 .screen{display:none}.screen.active{display:block}
 
-/* Intro */
+/* ── intro ── */
 .intro-card{background:var(--navy);border-radius:16px;padding:1.75rem 1.5rem;margin-bottom:1rem}
-.eye{font-size:10px;font-weight:700;color:#A8C4E8;letter-spacing:.1em;text-transform:uppercase;margin-bottom:.55rem}
-.intro-h{font-size:27px;font-weight:800;color:#fff;line-height:1.15;margin-bottom:.5rem}
-.intro-sub{font-size:13.5px;color:#8BAABF;line-height:1.65;margin-bottom:1.2rem}
-.tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:1.2rem}
+.eye{font-size:10px;font-weight:700;color:#A8C4E8;letter-spacing:.1em;text-transform:uppercase;margin-bottom:.5rem}
+.intro-h{font-size:26px;font-weight:800;color:#fff;line-height:1.2;margin-bottom:.45rem}
+.intro-sub{font-size:13.5px;color:#8BAABF;line-height:1.65;margin-bottom:1.15rem}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:1.15rem}
 .tag{font-size:11px;color:#A8C4E8;background:rgba(168,196,232,.13);border:1px solid rgba(168,196,232,.22);border-radius:99px;padding:3px 12px}
-.zones{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-bottom:1.2rem}
-.zone{border-radius:9px;padding:10px 12px}
-.zone.g{background:var(--green-lt)}.zone.y{background:var(--yellow-lt)}.zone.r{background:var(--red-lt)}
-.zone-l{font-size:12px;font-weight:700;margin-bottom:2px}
-.zone-l.g{color:#1A4D0A}.zone-l.y{color:#52330A}.zone-l.r{color:#6B1D0A}
-.zone-s{font-size:11px}.zone-s.g{color:#3B6D11}.zone-s.y{color:#854F0B}.zone-s.r{color:#993C1D}
-.intro-note{font-size:12px;color:rgba(168,196,232,.7);margin-bottom:1.1rem;line-height:1.55}
-.start-btn{width:100%;background:var(--teal);color:#fff;border:none;border-radius:11px;padding:14px;font-size:15px;font-weight:700;cursor:pointer;transition:background .15s}
+.zone-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-bottom:1.15rem}
+.zc{border-radius:9px;padding:10px 12px}
+.zc.g{background:var(--g-bg)}.zc.y{background:var(--y-bg)}.zc.r{background:var(--r-bg)}
+.zc-l{font-size:12px;font-weight:700;margin-bottom:2px}
+.zc-l.g{color:var(--g-title)}.zc-l.y{color:var(--y-title)}.zc-l.r{color:var(--r-title)}
+.zc-s{font-size:11px}
+.zc-s.g{color:var(--g-sub)}.zc-s.y{color:var(--y-sub)}.zc-s.r{color:var(--r-sub)}
+.intro-note{font-size:12px;color:rgba(168,196,232,.7);line-height:1.55;margin-bottom:1.1rem}
+.start-btn{width:100%;background:var(--teal);color:#fff;border:none;border-radius:11px;padding:14px;font-size:15px;font-weight:700;cursor:pointer}
 .start-btn:hover{background:var(--teal2)}.start-btn:active{transform:scale(.98)}
 
-/* Quiz */
+/* ── quiz ── */
 .prog-bg{height:3px;background:var(--border);border-radius:99px;margin-bottom:1.4rem}
 .prog-fill{height:3px;background:var(--teal);border-radius:99px;transition:width .35s ease}
 .q-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:.4rem}
 .q-num{font-size:11px;font-weight:700;color:var(--text3);letter-spacing:.07em;text-transform:uppercase}
 .q-ctr{font-size:11px;color:var(--text3);font-weight:600}
-.q-pill{display:inline-block;font-size:11px;font-weight:700;color:var(--teal2);background:var(--teal-lt);border-radius:99px;padding:3px 13px;margin-bottom:.8rem}
-.scenario{background:var(--card);border-left:3px solid var(--teal);border-radius:0 9px 9px 0;padding:11px 14px;margin-bottom:1rem;font-size:13px;color:var(--text2);line-height:1.6;box-shadow:0 1px 3px rgba(0,0,0,.05)}
+.q-pill{display:inline-block;font-size:11px;font-weight:700;color:var(--teal2);background:var(--teal-lt);border-radius:99px;padding:3px 13px;margin-bottom:.75rem}
+.scenario{background:var(--card);border-left:3px solid var(--teal);border-top:.5px solid var(--border);border-right:.5px solid var(--border);border-bottom:.5px solid var(--border);border-radius:0 9px 9px 0;padding:11px 14px;margin-bottom:.9rem;font-size:13px;color:var(--text2);line-height:1.6}
 .q-text{font-size:17px;font-weight:700;color:var(--text);line-height:1.38;margin-bottom:1rem}
 .opts{display:flex;flex-direction:column;gap:8px}
-.opt{width:100%;text-align:left;background:var(--card);border:1.5px solid var(--border);border-radius:12px;padding:12px 14px;cursor:pointer;transition:border-color .12s,background .12s;box-shadow:0 1px 2px rgba(0,0,0,.04)}
+.opt{width:100%;text-align:left;background:var(--card);border:1.5px solid var(--border);border-radius:12px;padding:12px 14px;cursor:pointer;transition:border-color .12s,background .12s}
 .opt:hover{border-color:#5DCAA5;background:#F7FFFD}.opt.sel{border-color:var(--teal);background:var(--teal-lt)}
 .opt-row{display:flex;align-items:flex-start;gap:10px}
 .opt-letter{width:22px;height:22px;border-radius:50%;background:var(--border);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;color:var(--text3);flex-shrink:0;margin-top:1px;transition:background .12s,color .12s}
 .opt.sel .opt-letter{background:var(--teal);color:#fff}
-.opt-body{flex:1}
-.opt-t{font-size:13px;color:var(--text);line-height:1.45;display:block}
-.opt-v{font-size:11px;color:var(--teal);font-weight:700;margin-top:4px;display:block}
-.opt.sel .opt-v{color:var(--teal2)}
-.nav{display:flex;justify-content:space-between;align-items:center;margin-top:1.15rem;gap:12px}
+.opt-t{font-size:13px;color:var(--text);line-height:1.45}
+.nav{display:flex;justify-content:space-between;align-items:center;margin-top:1.1rem;gap:12px}
 .btn-back{background:var(--card);border:1.5px solid var(--border);border-radius:9px;padding:10px 18px;font-size:13px;font-weight:600;color:var(--text2);cursor:pointer}
 .btn-back:hover{background:var(--bg)}
-.btn-next{background:var(--teal);color:#fff;border:none;border-radius:9px;padding:10px 24px;font-size:13px;font-weight:700;cursor:pointer;opacity:.32;pointer-events:none;transition:opacity .15s,background .12s}
+.btn-next{background:var(--teal);color:#fff;border:none;border-radius:9px;padding:10px 24px;font-size:13px;font-weight:700;cursor:pointer;opacity:.32;pointer-events:none;transition:opacity .15s}
 .btn-next.go{opacity:1;pointer-events:all}.btn-next.go:hover{background:var(--teal2)}.btn-next.go:active{transform:scale(.98)}
 
-/* Results */
-.res-hero{text-align:center;padding:1.5rem 0 .75rem}
-.overall-pill{display:inline-block;padding:6px 22px;border-radius:99px;font-size:14px;font-weight:700;background:var(--teal-lt);color:var(--teal2);margin-bottom:.7rem}
-.overall-sub{font-size:13.5px;color:var(--text2);line-height:1.6;max-width:480px;margin:0 auto}
-.res-section{margin:1rem 0}
-.res-label{font-size:13px;font-weight:700;color:var(--text);margin-bottom:.65rem;padding-bottom:.4rem;border-bottom:1.5px solid var(--border)}
+/* ── results ── */
+.zone-banner{border-radius:14px;padding:1.4rem 1.4rem 1.2rem;margin-bottom:1.25rem}
+.zone-banner.green{background:var(--g-bg);border:1.5px solid var(--g-bdr)}
+.zone-banner.yellow{background:var(--y-bg);border:1.5px solid var(--y-bdr)}
+.zone-banner.red{background:var(--r-bg);border:1.5px solid var(--r-bdr)}
+.zone-head{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.zone-dot{width:13px;height:13px;border-radius:50%;flex-shrink:0}
+.zone-dot.green{background:var(--g-dot)}.zone-dot.yellow{background:var(--y-dot)}.zone-dot.red{background:var(--r-dot)}
+.zone-label{font-size:10px;font-weight:700;letter-spacing:.09em;text-transform:uppercase}
+.zone-label.green{color:var(--g-sub)}.zone-label.yellow{color:var(--y-sub)}.zone-label.red{color:var(--r-sub)}
+.zone-title{font-size:20px;font-weight:800;margin-bottom:7px}
+.zone-title.green{color:var(--g-title)}.zone-title.yellow{color:var(--y-title)}.zone-title.red{color:var(--r-title)}
+.zone-desc{font-size:13px;line-height:1.65}
+.zone-desc.green{color:var(--g-sub)}.zone-desc.yellow{color:var(--y-sub)}.zone-desc.red{color:var(--r-sub)}
+
+.res-sec{margin:1.1rem 0}
+.res-lbl{font-size:13px;font-weight:700;color:var(--text);padding-bottom:.4rem;border-bottom:1.5px solid var(--border);margin-bottom:.7rem}
+
 .pbar-row{display:flex;align-items:center;gap:9px;margin-bottom:9px}
-.pbar-name{font-size:11.5px;color:var(--text2);font-weight:600;width:126px;flex-shrink:0;text-align:right}
+.pbar-name{font-size:11.5px;color:var(--text2);font-weight:600;width:128px;flex-shrink:0;text-align:right}
 .pbar-track{flex:1;height:9px;background:var(--border);border-radius:99px;overflow:hidden}
-.pbar-fill{height:9px;border-radius:99px;transition:width .85s cubic-bezier(.4,0,.2,1);width:0}
-.pbar-pct{font-size:11.5px;font-weight:700;color:var(--text);width:32px}
-.radar-wrap{display:flex;justify-content:center;margin:.25rem 0}
-.growth-card{background:var(--card);border:1.5px solid var(--border);border-radius:13px;padding:1.1rem 1.25rem;box-shadow:0 1px 4px rgba(0,0,0,.06)}
+.pbar-fill{height:9px;border-radius:99px;width:0;transition:width .85s cubic-bezier(.4,0,.2,1)}
+.pbar-pct{font-size:11.5px;font-weight:700;color:var(--text);width:34px}
+
+.radar-wrap{display:flex;justify-content:center;margin:.5rem 0 .25rem}
+
+.growth-card{background:var(--card);border:1.5px solid var(--border);border-radius:13px;padding:1.1rem 1.25rem}
 .growth-eye{font-size:10px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.07em;margin-bottom:5px}
 .growth-name{font-size:20px;font-weight:800;margin-bottom:6px}
 .growth-desc{font-size:13px;color:var(--text2);line-height:1.6;margin-bottom:.75rem}
 .growth-nudge{font-size:12.5px;color:var(--teal2);background:var(--teal-lt);border-radius:9px;padding:10px 13px;line-height:1.55;font-weight:500}
-.pat{background:var(--card);border:1.5px solid var(--border);border-radius:12px;padding:12px 15px;margin-bottom:8px;box-shadow:0 1px 2px rgba(0,0,0,.04)}
+
+.pat{background:var(--card);border:1.5px solid var(--border);border-radius:12px;padding:12px 15px;margin-bottom:8px}
 .pat.hot{border-left:4px solid #E24B4A}.pat.warm{border-left:4px solid #BA7517}.pat.cool{border-left:4px solid #1D9E75}
 .pat-h{font-size:12.5px;font-weight:700;margin-bottom:4px}
 .pat-h.hot{color:#A32D2D}.pat-h.warm{color:#854F0B}.pat-h.cool{color:#0F6E56}
 .pat-b{font-size:12.5px;color:var(--text2);line-height:1.55}
-.bridge{background:var(--navy);border-radius:13px;padding:1.1rem 1.25rem;text-align:center;margin-top:.5rem}
+
+.bridge{background:var(--navy);border-radius:13px;padding:1.1rem 1.25rem;text-align:center;margin-top:.75rem}
 .bridge-h{font-size:14px;font-weight:700;color:#fff;margin-bottom:5px}
 .bridge-s{font-size:12.5px;color:#8BAABF;line-height:1.55}
 .bridge-s em{color:#A8C4E8;font-style:normal;font-weight:600}
 .footer{text-align:center;font-size:11px;color:var(--text3);margin-top:1.75rem}
 
 @media(max-width:420px){
-  .zones{grid-template-columns:1fr}
+  .zone-grid{grid-template-columns:1fr}
   .pbar-name{width:96px;font-size:10.5px}
-  .intro-h{font-size:23px}
+  .intro-h{font-size:22px}
   .q-text{font-size:15px}
 }
 </style>
@@ -103,69 +118,73 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 <body>
 <div class="wrap">
 
-<!-- INTRO -->
 <div id="s-intro" class="screen active">
   <div class="intro-card">
     <div class="eye">Slalom Quality Engineering · Workshop</div>
-    <div class="intro-h">Pulse Check</div>
-    <div class="intro-sub">12 scenarios from the parts of life you actually live — the group chat at 11pm, the patio that went too long, the friend who vents every time, the Sunday night feeling. Pick the honest answer. Your full pillar breakdown appears at the end.</div>
+    <div class="intro-h">Pulse Check Quiz</div>
+    <div class="intro-sub">12 real-life scenarios from the parts of life you actually live. Pick the honest answer — not the one that sounds evolved. Your zone, pillar scores, patterns and growth edge appear at the end.</div>
     <div class="tags">
       <span class="tag">12 questions</span>
       <span class="tag">~8 minutes</span>
-      <span class="tag">Radar chart at the end</span>
+      <span class="tag">Zone + pillar radar</span>
       <span class="tag">No login needed</span>
-      <span class="tag">Be honest</span>
     </div>
-    <div class="zones">
-      <div class="zone g"><div class="zone-l g">Green zone</div><div class="zone-s g">Calm, choosing, present</div></div>
-      <div class="zone y"><div class="zone-l y">Yellow zone</div><div class="zone-s y">Activated, scattered</div></div>
-      <div class="zone r"><div class="zone-l r">Red / grey zone</div><div class="zone-s r">Reactive, shutdown</div></div>
+    <div class="zone-grid">
+      <div class="zc g"><div class="zc-l g">Green zone</div><div class="zc-s g">Calm, choosing, present</div></div>
+      <div class="zc y"><div class="zc-l y">Yellow zone</div><div class="zc-s y">Activated, scattered</div></div>
+      <div class="zc r"><div class="zc-l r">Red / grey zone</div><div class="zc-s r">Reactive, shutdown</div></div>
     </div>
-    <div class="intro-note">The vibe label next to each answer is just a shorthand — it is not a grade. No one is keeping score. Look at the patterns at the end.</div>
-    <button class="start-btn" onclick="startQuiz()">Start the quiz</button>
+    <div class="intro-note">No answer is right or wrong — they are data. Look at the patterns at the end, not the individual points.</div>
+    <button class="start-btn" onclick="go()">Start the quiz</button>
   </div>
   <div class="footer">Slalom QE · Showing Up Under Pressure · Workshop Resource</div>
 </div>
 
-<!-- QUIZ -->
 <div id="s-quiz" class="screen">
   <div class="prog-bg"><div class="prog-fill" id="prog"></div></div>
   <div class="q-top">
-    <span class="q-num" id="q-num">Question 1 of 12</span>
-    <span class="q-ctr" id="q-ctr">1 / 12</span>
+    <span class="q-num" id="qnum">Question 1 of 12</span>
+    <span class="q-ctr" id="qctr">1 / 12</span>
   </div>
-  <div class="q-pill" id="q-pill"></div>
-  <div class="scenario" id="q-scene"></div>
-  <div class="q-text" id="q-text"></div>
+  <div class="q-pill" id="qpill"></div>
+  <div class="scenario" id="qscene"></div>
+  <div class="q-text" id="qtext"></div>
   <div class="opts" id="opts"></div>
   <div class="nav">
-    <button class="btn-back" id="btn-back" onclick="prevQ()">Back</button>
-    <button class="btn-next" id="btn-next" onclick="nextQ()">Next</button>
+    <button class="btn-back" id="bbk" onclick="prev()">Back</button>
+    <button class="btn-next" id="bnx" onclick="next()">Next</button>
   </div>
 </div>
 
-<!-- RESULTS -->
 <div id="s-results" class="screen">
-  <div class="res-hero">
-    <div class="overall-pill" id="r-pill"></div><br>
-    <div class="overall-sub" id="r-sub"></div>
+  <div class="zone-banner" id="zbanner">
+    <div class="zone-head">
+      <span class="zone-dot" id="zdot"></span>
+      <span class="zone-label" id="zlabel"></span>
+    </div>
+    <div class="zone-title" id="ztitle"></div>
+    <div class="zone-desc" id="zdesc"></div>
   </div>
-  <div class="res-section">
-    <div class="res-label">Your pillar scores</div>
-    <div id="pbar-out"></div>
+
+  <div class="res-sec">
+    <div class="res-lbl">Your pillar scores</div>
+    <div id="pbars"></div>
     <div class="radar-wrap"><svg id="radar" width="290" height="290" viewBox="0 0 290 290"></svg></div>
   </div>
-  <div class="res-section">
-    <div class="res-label">Your growth edge</div>
-    <div class="growth-card" id="growth-card"></div>
+
+  <div class="res-sec">
+    <div class="res-lbl">Your growth edge</div>
+    <div class="growth-card" id="growth"></div>
   </div>
-  <div class="res-section">
-    <div class="res-label">Patterns from your answers</div>
-    <div id="patterns-out"></div>
+
+  <div class="res-sec">
+    <div class="res-lbl">Patterns from your answers</div>
+    <div id="patterns"></div>
   </div>
+
   <div class="bridge">
     <div class="bridge-h">One thing to do right now</div>
-    <div class="bridge-s">Your facilitator is about to ask: <em>"What was your lowest pillar?"</em> Drop it in the chat or say it out loud. That single answer is your bridge into Part 2.</div>
+    <div class="bridge-s">Your facilitator will ask: <em>"What was your lowest pillar?"</em> — drop it in the chat or say it out loud. That is your bridge into Part 2.</div>
   </div>
   <div class="footer">Slalom QE · Showing Up Under Pressure · Workshop Resource</div>
 </div>
@@ -173,246 +192,319 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 </div>
 
 <script>
-const PILLARS=[
-  {key:"wellbeing",     label:"Well-being",      short:"Well-being",  color:"#534AB7",lt:"#EEEDFE"},
-  {key:"awareness",     label:"Self-awareness",   short:"Awareness",   color:"#3B6D11",lt:"#EAF3DE"},
-  {key:"empathy",       label:"Attuned empathy",  short:"Empathy",     color:"#712B13",lt:"#FAECE7"},
-  {key:"boundaries",    label:"Boundaries",       short:"Boundaries",  color:"#BA7517",lt:"#FEF3E0"},
-  {key:"regulation",    label:"Self-regulation",  short:"Regulation",  color:"#0D7A6E",lt:"#E0F4F1"},
-  {key:"responsiveness",label:"Responsiveness",   short:"Responsive",  color:"#185FA5",lt:"#E6F1FB"},
+const P=[
+  {k:"wellbeing",    lb:"Well-being",     sh:"Well-being",  c:"#534AB7",lt:"#EEEDFE"},
+  {k:"awareness",    lb:"Self-awareness",  sh:"Awareness",   c:"#3B6D11",lt:"#EAF3DE"},
+  {k:"empathy",      lb:"Attuned empathy", sh:"Empathy",     c:"#712B13",lt:"#FAECE7"},
+  {k:"boundaries",   lb:"Boundaries",      sh:"Boundaries",  c:"#BA7517",lt:"#FEF3E0"},
+  {k:"regulation",   lb:"Self-regulation", sh:"Regulation",  c:"#0D7A6E",lt:"#E0F4F1"},
+  {k:"responsiveness",lb:"Responsiveness", sh:"Responsive",  c:"#185FA5",lt:"#E6F1FB"},
 ];
 
 const TIPS={
-  wellbeing:     {desc:"Your social life is supposed to refuel you, not drain you further. If Sunday nights feel like another obligation finished rather than a person restored, your body budget needs attention before anything else can shift.",nudge:"In Part 2: Minimum Vital Productions — the laughably small habits that keep your recovery consistent even on the worst weeks."},
-  awareness:     {desc:"Something is happening inside you before it shows up in your behaviour. The gap is in noticing it early enough to actually choose your response rather than discover it after the fact.",nudge:"In Part 2: Name it to tame it — the fastest self-awareness upgrade in the toolkit, backed by Dr. Daniel Siegel's neuroscience research."},
-  empathy:       {desc:"Reading what someone actually needs — not assuming, not jumping to fix — is harder than it looks, especially after a long week when your own tank is low.",nudge:"In Part 2: Heard, Helped, or Hugged? — the three-second question that changes how you respond to people in real time."},
-  boundaries:    {desc:"You tend to say yes when you mean maybe, or you cancel when you should have said no earlier. Either way, resentment accrues quietly. Boundaries are not walls — they are what makes real connection sustainable long-term.",nudge:"In Part 2: Normalize the discomfort — why the guilt of saying no is a nervous system signal, not a moral verdict."},
-  regulation:    {desc:"Under pressure — the patio that goes too long, the travel disagreement, the friend who vents — your nervous system takes the wheel before you get to choose. That is not a character flaw. It is a learnable skill.",nudge:"In Part 2: The 90-second rule — the neuroscience tool you can use anywhere, including in the middle of a difficult moment."},
-  responsiveness:{desc:"Showing up for people when it is easy is fine. Saying the thing you have been meaning to say, following through after the tense moment — that is the gap. Connection requires small, consistent acts of presence.",nudge:"In Part 2: Bids for connection — why the small moments matter more than the grand gestures, and how to stop missing them."},
+  wellbeing:{
+    d:"Your social life is supposed to refuel you, not drain you further. If Sunday nights feel like another obligation finished rather than a person restored, your body budget needs attention before anything else can shift.",
+    n:"In Part 2: Minimum Viable Habits — the laughably small practices that keep your recovery consistent even on your worst weeks."
+  },
+  awareness:{
+    d:"Something is happening inside you before it shows up in your behaviour. The gap is noticing it early enough to actually choose your response rather than discover it after the fact.",
+    n:"In Part 2: Name it to tame it — the fastest self-awareness upgrade in the toolkit, backed by neuroscience research."
+  },
+  empathy:{
+    d:"Reading what someone actually needs — not assuming, not jumping to fix — is harder than it looks, especially after a long week when your own tank is low.",
+    n:"In Part 2: Heard, Helped, or Hugged? — the question that changes how you respond to people in real time."
+  },
+  boundaries:{
+    d:"You tend to say yes when you mean maybe, or cancel when you should have said no earlier. Either way, resentment builds quietly. Boundaries are not walls — they are what makes real showing-up sustainable.",
+    n:"In Part 2: Normalize the discomfort — why the guilt of saying no is a nervous system signal, not a moral verdict."
+  },
+  regulation:{
+    d:"Under pressure — the hangout that went too long, the travel disagreement, the draining friend — your nervous system takes the wheel before you get to choose. That is not a flaw. It is a learnable skill.",
+    n:"In Part 2: The 90-second rule — the neuroscience tool you can use anywhere, including in the middle of a difficult moment."
+  },
+  responsiveness:{
+    d:"Showing up for people when it is easy is one thing. Saying the thing you have been meaning to say, following through after a tense moment — that is the gap. Connection requires small, consistent acts of presence.",
+    n:"In Part 2: Bids for connection — why the small moments matter more than grand gestures, and how to stop missing them."
+  },
 };
 
 const Qs=[
-  {tag:"The group chat at 11pm",pillar:"wellbeing",
-   scene:"It is a Tuesday. You have a 9am standup. The friend group chat just exploded with weekend plans, memes, and a debate about Tremblant vs Tulum. It is 11:07pm and your phone will not stop buzzing.",
-   text:"What do you actually do?",
-   opts:[
-    {l:"A",t:"You are fully in it. Sending voice notes, voting on Tulum, loving this. Sleep is overrated and these are your people.",v:"Connected but depleting",s:1},
-    {l:"B",t:"You mute the chat, put your phone face down, and deal with it tomorrow. You know you will be useless at 9am if you don't.",v:"Self-regulated",s:3},
-    {l:"C",t:"You read every message but don't reply. You feel weirdly guilty about not participating, then feel weird about feeling guilty.",v:"Anxious observer",s:1},
-    {l:"D",t:"You send a quick 'lol dying, catch up tomorrow' and put the phone down. Present enough, boundaried enough.",v:"Easy exit, still connected",s:3},
-   ]},
-  {tag:"The fitness pressure",pillar:"awareness",
-   scene:"It is March. You told yourself this would be the year you stayed consistent with the gym, your run, the sport you love. It has been three weeks since you went. You run into a colleague who is training for their second half marathon.",
-   text:"Your honest internal reaction:",
-   opts:[
-    {l:"A",t:"Genuine inspiration. You ask about their training plan and sign up for something that afternoon.",v:"Growth mindset, grounded",s:3},
-    {l:"B",t:"A quiet sting of 'I should be doing that' follows you around for the rest of the day without you ever naming it.",v:"Unnamed comparison spiral",s:1},
-    {l:"C",t:"You immediately list the reasons their situation is different. Kids, commute, work, the weather. All true. Also a little defensive.",v:"Justified avoidance",s:0},
-    {l:"D",t:"You feel it, name it to yourself — 'I am comparing and it is making me feel behind' — let it go, and maybe send them a high-five text.",v:"Self-aware and moving on",s:3},
-   ]},
-  {tag:"The colleague who is struggling",pillar:"empathy",
-   scene:"Someone on your team — not your closest friend, but someone you genuinely like — has been off for two weeks. Quieter in standups, shorter in Slack. You can feel it without them saying anything.",
-   text:"What do you do?",
-   opts:[
-    {l:"A",t:"Nothing yet. You don't want to overstep. Maybe they're just busy. You will wait until they bring it up.",v:"Passive presence",s:0},
-    {l:"B",t:"You message them: 'Hey, no pressure — just noticed you seem a bit stretched lately. Around if you want to grab a coffee or just vent.'",v:"Attuned and boundaried",s:3},
-    {l:"C",t:"You mention it to a mutual colleague to see if they have noticed too. Technically checking in. Also kind of gossiping.",v:"Indirect support",s:1},
-    {l:"D",t:"You bring it up in a team setting: 'Is everyone doing okay? Checking in on the group.' Well-meaning, wrong venue.",v:"Good intention, off target",s:0},
-   ]},
-  {tag:"The cancelled plan you secretly wanted to cancel",pillar:"boundaries",
-   scene:"Friday at 4pm. You have dinner plans you made three weeks ago when you had more energy. You are now exhausted and would genuinely rather stay home. The other person texts first: 'Still on for tonight?'",
-   text:"What actually happens?",
-   opts:[
-    {l:"A",t:"You say yes, show up, have a surprisingly good time, and realize you needed human connection more than you thought.",v:"Pushed through, was right",s:2},
-    {l:"B",t:"You say yes, show up, count down until it is acceptable to leave, go home feeling relieved and slightly resentful.",v:"Obligation fulfilled, resentment built",s:0},
-    {l:"C",t:"You are honest: 'I am wiped — can we move to Sunday? I really want to see you, just not at my worst.' They say yes. You both feel good.",v:"Honest and connected",s:3},
-    {l:"D",t:"You say yes, then cancel two hours later with a vague excuse. Feel guilty. They are probably fine. You are not sure.",v:"Avoidant exit",s:0},
-   ]},
-  {tag:"The patio that went too long",pillar:"regulation",
-   scene:"Summer in Toronto or Montreal. Patio, cold drinks, your people, golden hour that turns into 11pm somehow. You have a big day tomorrow. Someone suggests one more spot.",
-   text:"Where is your nervous system actually at right now?",
-   opts:[
-    {l:"A",t:"Genuinely good. You know your limits, you are still present, and you are going to make the call to head home in the next 20 minutes with zero drama.",v:"Regulated enjoyment",s:3},
-    {l:"B",t:"Running on vibes and adrenaline. Tomorrow is a problem for tomorrow-you. Tonight-you is saying yes to the next spot.",v:"Yellow zone pushing red",s:1},
-    {l:"C",t:"You already mentally left an hour ago but you are still physically here because you don't want to be the one who ends it.",v:"Checked out but performing",s:0},
-    {l:"D",t:"You feel yourself getting slightly snappy with the server and a little louder than usual. Technically having fun. Also dysregulated.",v:"Activation without awareness",s:0},
-   ]},
-  {tag:"The travel disagreement",pillar:"regulation",
-   scene:"You are on a trip with people you love. Day three. Someone wants to do something you really do not want to do — the tourist thing, the over-planned itinerary, the 9pm dinner when you are already done.",
-   text:"What do you do?",
-   opts:[
-    {l:"A",t:"Go along with it. You don't want to be the difficult one. You are quietly miserable for two hours and call it flexibility.",v:"Fawn and suppress",s:0},
-    {l:"B",t:"Say something directly: 'Honestly I need a slow morning — you go ahead and I will meet you after.' No guilt, no drama.",v:"Honest autonomy",s:3},
-    {l:"C",t:"Agree, then slowly get more irritable until something small tips you into a comment sharper than you intended.",v:"Suppression then leak",s:0},
-    {l:"D",t:"Negotiate: 'What if we do half of that and then find somewhere to just sit for an hour?' You find the middle. Everyone is okay.",v:"Regulated compromise",s:3},
-   ]},
-  {tag:"The friend who vents, every time",pillar:"empathy",
-   scene:"You have a friend who calls when they are struggling. You genuinely care about them. But this is the fourth call this month about the same situation, and you are starting to feel like a therapist without the training or the hour.",
-   text:"What do you do?",
-   opts:[
-    {l:"A",t:"Answer every time, listen every time, say nothing about how it is affecting you. This is what good friends do.",v:"Enmeshed caretaking",s:0},
-    {l:"B",t:"Let it go to voicemail once, feel terribly guilty, call back immediately, listen for 45 minutes.",v:"Boundary attempt then collapse",s:1},
-    {l:"C",t:"Show up for the call, listen well, then gently say: 'I love you and I want to support you — have you thought about talking to someone who can actually help you work through this?'",v:"Boundaried care",s:3},
-    {l:"D",t:"Start screening their calls. Tell yourself you are just busy. Feel distant and a little ashamed about it.",v:"Avoidant withdrawal",s:0},
-   ]},
-  {tag:"The morning after a hard week",pillar:"wellbeing",
-   scene:"Saturday morning. You have had a genuinely hard week — pressure, a difficult conversation, not enough sleep. You wake up at 8am with nothing mandatory until noon.",
-   text:"What does your body actually need, and what do you give it?",
-   opts:[
-    {l:"A",t:"Coffee, phone, scrolling. Within 20 minutes you are in three different anxious thought loops about next week. You call this your slow morning.",v:"Pseudo-rest",s:0},
-    {l:"B",t:"You lie there and actually notice how you feel. Tired. A little flat. You stay in bed another 45 minutes without guilt and eat something real before anything else.",v:"Body budget deposit",s:3},
-    {l:"C",t:"You immediately make plans. Brunch, a workout, something productive. Stillness makes you anxious so you fill it.",v:"Activation as avoidance",s:0},
-    {l:"D",t:"You do the workout first — which you know genuinely helps you regulate — then give yourself the slow morning after. You know your own system.",v:"Self-aware recovery",s:3},
-   ]},
-  {tag:"The cultural moment you were not prepared for",pillar:"empathy",
-   scene:"You are at a Caribana event, a Diwali celebration, a Lunar New Year dinner, a gathering that is not from your own background. Something happens — a tradition, a ritual, a moment — that you do not understand and were not expecting.",
-   text:"Your honest response:",
-   opts:[
-    {l:"A",t:"Quiet, slightly awkward, smile and nod. You don't want to say the wrong thing so you say nothing.",v:"Polite withdrawal",s:1},
-    {l:"B",t:"You ask someone nearby, genuinely curious: 'Can you tell me what this is? I want to understand.'",v:"Curious and present",s:3},
-    {l:"C",t:"You take out your phone to look it up discreetly instead of asking the person next to you who would clearly love to explain it.",v:"Connection avoided",s:1},
-    {l:"D",t:"You let yourself feel moved by it even if you don't fully understand it, and tell the person who invited you afterward what it meant to be included.",v:"Open and connected",s:3},
-   ]},
-  {tag:"The thing you have been meaning to say",pillar:"responsiveness",
-   scene:"There is someone in your life — a friend, a family member, a colleague you respect — who did something for you recently that genuinely mattered. You thought about telling them. You have not yet. It has been two weeks.",
-   text:"What is actually going on?",
-   opts:[
-    {l:"A",t:"You will say it in person next time you see them. The moment will be right. (The moment never feels right.)",v:"Deferred connection",s:1},
-    {l:"B",t:"You feel slightly vulnerable saying it directly so you liked their Instagram post instead. It counts, kind of.",v:"Indirect acknowledgment",s:0},
-    {l:"C",t:"You text them right now, while reading this. Something short and real: 'Hey — I don't think I said it properly but what you did really meant something to me.'",v:"Responsive and present",s:3},
-    {l:"D",t:"You have thought about it so many times that it now feels too late and slightly weird to bring up. So you don't.",v:"Overthought to silence",s:0},
-   ]},
-  {tag:"The big life update someone shares",pillar:"empathy",
-   scene:"A friend tells you something significant — engaged, pregnant, got the job, or going through a divorce, a health scare, lost a parent. It is real news, not small talk.",
-   text:"What you actually do in the next 60 seconds:",
-   opts:[
-    {l:"A",t:"Say 'oh wow' with genuine feeling, ask one good question, and actually listen to the answer without planning your next response.",v:"Present and attuned",s:3},
-    {l:"B",t:"Match the energy you think is expected, say the right things, and realize afterward you were performing support rather than feeling it.",v:"Autopilot empathy",s:1},
-    {l:"C",t:"Immediately relate it to something from your own life. 'That is so funny, I was just going through something similar...' Well-intentioned pivot, loses them.",v:"Empathy redirected to self",s:0},
-    {l:"D",t:"Freeze slightly. You don't know the right thing to say so you say something safe and generic and change the subject a minute later.",v:"Discomfort avoidance",s:0},
-   ]},
-  {tag:"The Sunday night check-in",pillar:"awareness",
-   scene:"It is Sunday at 8pm. The week starts tomorrow. Without thinking about what you should feel, what is actually true right now?",
-   text:"Pick the most honest one:",
-   opts:[
-    {l:"A",t:"You feel ready. Not fake-ready, actually ready. The weekend did its job.",v:"Regulated baseline",s:3},
-    {l:"B",t:"You feel fine but notice a low hum of dread that has been there since around 4pm. You have named it before. You are naming it again now.",v:"Aware of the pattern",s:3},
-    {l:"C",t:"You are not sure how you feel. You have been so busy that you have not checked in with yourself since Thursday and you have lost the signal.",v:"Disconnected from self",s:0},
-    {l:"D",t:"You feel it clearly — tired, a bit anxious, not quite restored — and you do one small thing about it before bed. A walk, a conversation, 10 minutes of nothing. You know what works.",v:"Self-aware and responsive",s:3},
-   ]},
+  {
+    tag:"The group chat at 11 PM",
+    pillar:"wellbeing",
+    scene:"It is Tuesday night. You have a 9 AM standup tomorrow. At 11:07 PM, your friend group chat explodes with travel plans and memes.",
+    text:"What do you do?",
+    opts:[
+      {l:"A",t:"I join in and stay up late.",s:0},
+      {l:"B",t:"I mute it and sleep.",s:3},
+      {l:"C",t:"I read everything, say nothing.",s:1},
+      {l:"D",t:"I send one message, then log off.",s:3},
+    ]
+  },
+  {
+    tag:"The fitness pressure",
+    pillar:"awareness",
+    scene:"You have not worked out in three weeks. A colleague says they are training for a half marathon.",
+    text:"What is your honest reaction?",
+    opts:[
+      {l:"A",t:"I feel inspired and take action today.",s:3},
+      {l:"B",t:"I feel pressured all day.",s:0},
+      {l:"C",t:"I justify why I have not started.",s:0},
+      {l:"D",t:"I notice comparison and move on.",s:3},
+    ]
+  },
+  {
+    tag:"The colleague who is struggling",
+    pillar:"empathy",
+    scene:"Someone on your team has seemed off for two weeks — quieter and brief in messages.",
+    text:"What do you do?",
+    opts:[
+      {l:"A",t:"Nothing. I do not want to overstep.",s:0},
+      {l:"B",t:"I send a private check-in message.",s:3},
+      {l:"C",t:"I ask another colleague first.",s:1},
+      {l:"D",t:"I check in with everyone in a team meeting.",s:0},
+    ]
+  },
+  {
+    tag:"The plan you want to cancel",
+    pillar:"boundaries",
+    scene:"It is Friday at 4 PM. You are exhausted. You made dinner plans three weeks ago. They text: \"Still on?\"",
+    text:"What do you do?",
+    opts:[
+      {l:"A",t:"I go and enjoy it.",s:2},
+      {l:"B",t:"I go but stay drained.",s:0},
+      {l:"C",t:"I reschedule honestly.",s:3},
+      {l:"D",t:"I confirm, then cancel late.",s:0},
+    ]
+  },
+  {
+    tag:"The hangout that went too long",
+    pillar:"regulation",
+    scene:"You are out with friends. It is 10 PM. You have a big day tomorrow. Someone suggests one more stop.",
+    text:"What is your state right now?",
+    opts:[
+      {l:"A",t:"I set a leave time and stick to it.",s:3},
+      {l:"B",t:"I stay out and deal with tomorrow later.",s:1},
+      {l:"C",t:"I want to leave but do not.",s:0},
+      {l:"D",t:"I stay, but I get irritable.",s:0},
+    ]
+  },
+  {
+    tag:"The travel disagreement",
+    pillar:"regulation",
+    scene:"You are on day three of a trip with people you love. They want to do something you do not want to do.",
+    text:"What do you do?",
+    opts:[
+      {l:"A",t:"I agree and resent it.",s:0},
+      {l:"B",t:"I state my plan clearly.",s:3},
+      {l:"C",t:"I agree first, then snap later.",s:0},
+      {l:"D",t:"I suggest a compromise.",s:3},
+    ]
+  },
+  {
+    tag:"The friend who always vents",
+    pillar:"empathy",
+    scene:"A friend keeps calling about the same problem. You care about them, but you are drained.",
+    text:"What do you do?",
+    opts:[
+      {l:"A",t:"I answer every time and hide my limits.",s:0},
+      {l:"B",t:"I delay, then call back from guilt.",s:1},
+      {l:"C",t:"I listen, set a boundary, and suggest help.",s:3},
+      {l:"D",t:"I avoid their calls.",s:0},
+    ]
+  },
+  {
+    tag:"The morning after a hard week",
+    pillar:"wellbeing",
+    scene:"It is Saturday at 8 AM. Nothing is planned until noon.",
+    text:"What do you actually do?",
+    opts:[
+      {l:"A",t:"Phone and scrolling right away.",s:0},
+      {l:"B",t:"Rest first, then basic care.",s:3},
+      {l:"C",t:"Fill the morning to avoid stillness.",s:0},
+      {l:"D",t:"Reset with exercise, then slow down.",s:3},
+    ]
+  },
+  {
+    tag:"The cultural moment you did not expect",
+    pillar:"empathy",
+    scene:"You are at a cultural event outside your background. A traditional moment happens and you do not understand it.",
+    text:"What is your honest response?",
+    opts:[
+      {l:"A",t:"I stay quiet and nod.",s:1},
+      {l:"B",t:"I ask what it means.",s:3},
+      {l:"C",t:"I google it privately.",s:1},
+      {l:"D",t:"I engage, then thank the host.",s:3},
+    ]
+  },
+  {
+    tag:"The thanks you have not sent",
+    pillar:"responsiveness",
+    scene:"Someone did something meaningful for you two weeks ago. You still have not thanked them properly.",
+    text:"What is happening?",
+    opts:[
+      {l:"A",t:"I wait for the perfect moment.",s:1},
+      {l:"B",t:"I do a low-effort thank-you.",s:0},
+      {l:"C",t:"I send a direct thank-you now.",s:3},
+      {l:"D",t:"I avoid it because it feels late.",s:0},
+    ]
+  },
+  {
+    tag:"The big life update",
+    pillar:"empathy",
+    scene:"A friend shares major life news — engagement, separation, loss. In the next 60 seconds —",
+    text:"What do you do?",
+    opts:[
+      {l:"A",t:"I acknowledge, ask, and listen.",s:3},
+      {l:"B",t:"I say the expected things.",s:1},
+      {l:"C",t:"I start to relate it to my experience.",s:0},
+      {l:"D",t:"I say something safe and generic, then move on.",s:0},
+    ]
+  },
+  {
+    tag:"The Sunday night check-in",
+    pillar:"awareness",
+    scene:"It is Sunday at 8 PM. The week starts tomorrow.",
+    text:"What is true for you right now?",
+    opts:[
+      {l:"A",t:"I feel ready for Monday.",s:3},
+      {l:"B",t:"I feel Sunday dread and ignore it.",s:0},
+      {l:"C",t:"I am not sure how I feel — I am busy.",s:0},
+      {l:"D",t:"I notice how I feel and do something small to feel better.",s:3},
+    ]
+  },
 ];
 
-let answers={},cur=0;
+let ans={},cur=0;
 
 function show(id){
   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
   window.scrollTo({top:0,behavior:'smooth'});
 }
-
-function startQuiz(){show('s-quiz');renderQ();}
-
-function renderQ(){
+function go(){show('s-quiz');render();}
+function render(){
   const q=Qs[cur],tot=Qs.length;
   document.getElementById('prog').style.width=(cur/tot*100)+'%';
-  document.getElementById('q-num').textContent='Question '+(cur+1)+' of '+tot;
-  document.getElementById('q-ctr').textContent=(cur+1)+' / '+tot;
-  document.getElementById('q-pill').textContent=q.tag;
-  document.getElementById('q-scene').textContent=q.scene;
-  document.getElementById('q-text').textContent=q.text;
-  document.getElementById('btn-back').style.visibility=cur===0?'hidden':'visible';
-  const nx=document.getElementById('btn-next');
+  document.getElementById('qnum').textContent='Question '+(cur+1)+' of '+tot;
+  document.getElementById('qctr').textContent=(cur+1)+' / '+tot;
+  document.getElementById('qpill').textContent=q.tag;
+  document.getElementById('qscene').textContent=q.scene;
+  document.getElementById('qtext').textContent=q.text;
+  document.getElementById('bbk').style.visibility=cur===0?'hidden':'visible';
+  const nx=document.getElementById('bnx');
   nx.textContent=cur===tot-1?'See my results':'Next';
-  nx.classList.toggle('go',answers[cur]!==undefined);
+  nx.classList.toggle('go',ans[cur]!==undefined);
   const el=document.getElementById('opts');
   el.innerHTML='';
   q.opts.forEach((o,i)=>{
     const b=document.createElement('button');
-    b.className='opt'+(answers[cur]===i?' sel':'');
-    b.innerHTML='<div class="opt-row"><div class="opt-letter">'+o.l+'</div><div class="opt-body"><span class="opt-t">'+o.t+'</span><span class="opt-v">'+o.v+'</span></div></div>';
+    b.className='opt'+(ans[cur]===i?' sel':'');
+    b.innerHTML='<div class="opt-row"><div class="opt-letter">'+o.l+'</div><div class="opt-t">'+o.t+'</div></div>';
     b.onclick=()=>{
-      answers[cur]=i;
+      ans[cur]=i;
       document.querySelectorAll('.opt').forEach((x,xi)=>x.classList.toggle('sel',xi===i));
-      document.getElementById('btn-next').classList.add('go');
+      document.getElementById('bnx').classList.add('go');
     };
     el.appendChild(b);
   });
 }
+function next(){if(ans[cur]===undefined)return;if(cur<Qs.length-1){cur++;render();}else results();}
+function prev(){if(cur>0){cur--;render();}}
 
-function nextQ(){if(answers[cur]===undefined)return;if(cur<Qs.length-1){cur++;renderQ();}else showResults();}
-function prevQ(){if(cur>0){cur--;renderQ();}}
-
-function showResults(){
+function results(){
   show('s-results');
-  const pScore={},pMax={};
-  PILLARS.forEach(p=>{pScore[p.key]=0;pMax[p.key]=0;});
-  Qs.forEach((q,i)=>{const a=answers[i]!==undefined?answers[i]:0;pScore[q.pillar]+=q.opts[a].s;pMax[q.pillar]+=3;});
-  const total=Object.values(pScore).reduce((a,b)=>a+b,0);
-  const maxTotal=Object.values(pMax).reduce((a,b)=>a+b,0);
-  const pct=Math.round(total/maxTotal*100);
+  const ps={},pm={};
+  P.forEach(p=>{ps[p.k]=0;pm[p.k]=0;});
+  Qs.forEach((q,i)=>{const a=ans[i]!==undefined?ans[i]:0;ps[q.pillar]+=q.opts[a].s;pm[q.pillar]+=3;});
+  const tot=Object.values(ps).reduce((a,b)=>a+b,0);
+  const max=Object.values(pm).reduce((a,b)=>a+b,0);
+  const pct=Math.round(tot/max*100);
 
-  let pill,sub;
-  if(pct>=75){pill="Largely regulated";sub="You tend to make real choices rather than reactive ones — across the group chat, the patio, the friend who needs you. Your growth edge is in your lowest pillar below. Small improvements there compound fast.";}
-  else if(pct>=55){pill="Adaptively activated";sub="Solid self-awareness but sustained pressure — a full weekend, a depleted week, a friend who vents every time — gets wobbly. You stretch and usually recover. The tools in Part 2 are built for exactly this gap.";}
-  else if(pct>=35){pill="Frequently reactive";sub="Your nervous system is running hotter than you probably realize. You are still showing up for everyone — but from a tank that never fully refills. Fixable. Starts with your body budget.";}
-  else{pill="Running on fumes";sub="Social life has started to feel like another thing to perform rather than something that restores you. That is your nervous system protecting itself by going small. More real recovery, fewer obligations you did not actually choose.";}
+  // Zone
+  let zcl,zlb,zti,zde;
+  if(pct>=72){
+    zcl="green";zlb="Green zone";
+    zti="Largely regulated";
+    zde="You tend to make real choices rather than reactive ones. You show up for people without consistently losing yourself in the process. Your growth edge is in your lowest pillar below — small improvements there compound quickly.";
+  } else if(pct>=45){
+    zcl="yellow";zlb="Yellow zone";
+    zti="Adaptively activated";
+    zde="You have real self-awareness but sustained pressure — a full social week, a depleted tank, a friend who needs you again — gets wobbly. You stretch and usually recover. The tools in Part 2 are built for exactly this gap.";
+  } else {
+    zcl="red";zlb="Red / grey zone";
+    zti="Frequently reactive";
+    zde="Your nervous system is running hotter than you probably realize. You are still showing up — but from a depleted tank. Social life has started to feel like something to manage rather than something that restores you. This is fixable. It starts with the body budget.";
+  }
+  document.getElementById('zbanner').className='zone-banner '+zcl;
+  document.getElementById('zdot').className='zone-dot '+zcl;
+  document.getElementById('zlabel').className='zone-label '+zcl;
+  document.getElementById('zlabel').textContent=zlb;
+  document.getElementById('ztitle').className='zone-title '+zcl;
+  document.getElementById('ztitle').textContent=zti;
+  document.getElementById('zdesc').className='zone-desc '+zcl;
+  document.getElementById('zdesc').textContent=zde;
 
-  document.getElementById('r-pill').textContent=pill;
-  document.getElementById('r-sub').textContent=sub;
-
-  const barOut=document.getElementById('pbar-out');
-  barOut.innerHTML='';
-  PILLARS.forEach(p=>{
-    const pc=Math.round(pScore[p.key]/pMax[p.key]*100);
-    barOut.innerHTML+=`<div class="pbar-row"><div class="pbar-name">${p.label}</div><div class="pbar-track"><div class="pbar-fill" id="b-${p.key}" style="background:${p.color}"></div></div><div class="pbar-pct">${pc}%</div></div>`;
+  // Bars
+  const pb=document.getElementById('pbars');
+  pb.innerHTML='';
+  P.forEach(p=>{
+    const pc=Math.round(ps[p.k]/pm[p.k]*100);
+    pb.innerHTML+=`<div class="pbar-row"><div class="pbar-name">${p.lb}</div><div class="pbar-track"><div class="pbar-fill" id="bf-${p.k}" style="background:${p.c}"></div></div><div class="pbar-pct">${pc}%</div></div>`;
   });
-  setTimeout(()=>{PILLARS.forEach(p=>{const pc=Math.round(pScore[p.key]/pMax[p.key]*100);const el=document.getElementById('b-'+p.key);if(el)el.style.width=pc+'%';});},100);
+  setTimeout(()=>{P.forEach(p=>{const pc=Math.round(ps[p.k]/pm[p.k]*100);const el=document.getElementById('bf-'+p.k);if(el)el.style.width=pc+'%';});},80);
 
-  drawRadar(pScore,pMax);
+  radar(ps,pm);
 
-  const lowest=PILLARS.slice().sort((a,b)=>(pScore[a.key]/pMax[a.key])-(pScore[b.key]/pMax[b.key]))[0];
-  const tip=TIPS[lowest.key];
-  document.getElementById('growth-card').innerHTML='<div class="growth-eye">Your growth edge</div><div class="growth-name" style="color:'+lowest.color+'">'+lowest.label+'</div><div class="growth-desc">'+tip.desc+'</div><div class="growth-nudge">'+tip.nudge+'</div>';
+  // Growth edge
+  const low=P.slice().sort((a,b)=>(ps[a.k]/pm[a.k])-(ps[b.k]/pm[b.k]))[0];
+  const tip=TIPS[low.k];
+  document.getElementById('growth').innerHTML=`<div class="growth-eye">Your growth edge</div><div class="growth-name" style="color:${low.c}">${low.lb}</div><div class="growth-desc">${tip.d}</div><div class="growth-nudge">${tip.n}</div>`;
 
-  const pOut=document.getElementById('patterns-out');
-  pOut.innerHTML='';
-  const reactCount=Qs.filter((q,i)=>q.opts[answers[i]!==undefined?answers[i]:0].s===0).length;
-  const wbPct=Math.round(pScore.wellbeing/pMax.wellbeing*100);
-  const bdPct=Math.round(pScore.boundaries/pMax.boundaries*100);
-  const regPct=Math.round(pScore.regulation/pMax.regulation*100);
-  const empPct=Math.round(pScore.empathy/pMax.empathy*100);
+  // Patterns
+  const po=document.getElementById('patterns');
+  po.innerHTML='';
+  const rc=Qs.filter((q,i)=>q.opts[ans[i]!==undefined?ans[i]:0].s===0).length;
+  const wb=Math.round(ps.wellbeing/pm.wellbeing*100);
+  const bd=Math.round(ps.boundaries/pm.boundaries*100);
+  const rg=Math.round(ps.regulation/pm.regulation*100);
+  const em=Math.round(ps.empathy/pm.empathy*100);
+  const rp=Math.round(ps.responsiveness/pm.responsiveness*100);
 
-  if(pct>=68)pOut.innerHTML+='<div class="pat cool"><div class="pat-h cool">Mostly regulated</div><div class="pat-b">You tend to choose your response rather than just react. Your lowest pillar is your targeted growth edge — small, consistent practice there gives you the most lift.</div></div>';
-  if(reactCount>=4)pOut.innerHTML+='<div class="pat hot"><div class="pat-h hot">Reactive pattern detected — '+reactCount+' of 12</div><div class="pat-b">In '+reactCount+' scenarios your response came from fight, flight, freeze, or fawn. Very common for people with full social lives and no real recovery built in. Not a character flaw — a fuel problem.</div></div>';
-  if(wbPct<50)pOut.innerHTML+='<div class="pat hot"><div class="pat-h hot">Body budget running low</div><div class="pat-b">Your well-being score is low. When sleep, movement, and real connection are depleted, emotional regulation becomes biologically harder — your brain literally does not have the resources. This is the first thing to fix.</div></div>';
-  if(bdPct<50)pOut.innerHTML+='<div class="pat warm"><div class="pat-h warm">Boundary challenges showing up</div><div class="pat-b">You tend to agree when you mean maybe, or cancel when you should have said no earlier. People-pleasing is a nervous system strategy — your system learned that keeping everyone happy kept you safe. It is learnable to shift.</div></div>';
-  if(regPct<50)pOut.innerHTML+='<div class="pat hot"><div class="pat-h hot">Regulation under pressure</div><div class="pat-b">The patio that goes too long, the travel disagreement, the friend who vents — in those moments your nervous system takes the wheel. The 90-second rule is your most immediately usable tool for this.</div></div>';
-  if(empPct<50)pOut.innerHTML+='<div class="pat warm"><div class="pat-h warm">Empathy running on autopilot</div><div class="pat-b">You care about the people around you — but under pressure, empathy shifts to performing support rather than feeling it. Reading what someone actually needs instead of assuming takes a surprisingly small habit change.</div></div>';
-  if(!pOut.innerHTML)pOut.innerHTML='<div class="pat cool"><div class="pat-h cool">Strong baseline across the board</div><div class="pat-b">Your responses show real regulation across most scenarios. Your lowest pillar above is the precise place where focused, small practice gives you the most return.</div></div>';
+  if(pct>=70) po.innerHTML+=card('cool','Mostly regulated','You tend to choose your response rather than just react. Your lowest pillar is your targeted growth edge — small, consistent practice there gives you the most lift.');
+  if(rc>=4) po.innerHTML+=card('hot',`Reactive pattern — ${rc} of 12 scenarios`,`In ${rc} scenarios your response came from fight, flight, freeze, or fawn. Very common for people with full social calendars and no real recovery built in. Not a character flaw — a fuel problem.`);
+  if(wb<50) po.innerHTML+=card('hot','Body budget running low','Your well-being score is low. When sleep, movement, and genuine connection are depleted, emotional regulation becomes biologically harder — not a mindset issue, a resource issue. This is the first thing to address.');
+  if(bd<50) po.innerHTML+=card('warm','Boundary challenges showing up','You tend to agree when you mean maybe, or cancel when you should have said no earlier. People-pleasing is a nervous system strategy — not a character flaw. It is learnable to shift.');
+  if(rg<50) po.innerHTML+=card('hot','Regulation under pressure','The hangout that goes too long, the travel disagreement, the moment something slips out sharper than intended — your nervous system takes the wheel. The 90-second rule is your most immediately usable tool.');
+  if(em<50) po.innerHTML+=card('warm','Empathy running on autopilot','You care about the people around you — but under pressure, care shifts to performing care rather than feeling it. Reading what someone actually needs instead of assuming takes a small habit change with outsized results.');
+  if(rp<50) po.innerHTML+=card('warm','Responsiveness gap','The thank-you not sent, the check-in you meant to do, the bid you noticed but did not answer — connection needs small, consistent follow-through. Missing a bid is not failure. Going silent about the miss is what erodes trust slowly.');
+  if(!po.innerHTML) po.innerHTML=card('cool','Strong baseline across the board','Your responses show real regulation across most scenarios. Your lowest pillar above is the precise place where focused, consistent practice gives you the most return.');
 }
 
-function drawRadar(pScore,pMax){
+function card(type,h,b){return`<div class="pat ${type}"><div class="pat-h ${type}">${h}</div><div class="pat-b">${b}</div></div>`;}
+
+function radar(ps,pm){
   const svg=document.getElementById('radar');
-  const cx=145,cy=145,r=100,n=PILLARS.length;
-  const angles=PILLARS.map((_,i)=>(Math.PI*2*i/n)-Math.PI/2);
-  let html='';
+  const cx=145,cy=145,r=100,n=P.length;
+  const ang=P.map((_,i)=>(Math.PI*2*i/n)-Math.PI/2);
+  let h='';
   [.25,.5,.75,1].forEach(ring=>{
-    const pts=angles.map(a=>[cx+Math.cos(a)*r*ring,cy+Math.sin(a)*r*ring]);
-    html+='<polygon points="'+pts.map(p=>p.join(',')).join(' ')+'" fill="none" stroke="#DDE3E9" stroke-width="1"/>';
-    if(ring<1)html+='<text x="'+(cx+5)+'" y="'+(cy-r*ring+4)+'" font-size="8.5" fill="#AAB4BE" font-family="-apple-system,sans-serif">'+Math.round(ring*100)+'%</text>';
+    const pts=ang.map(a=>[cx+Math.cos(a)*r*ring,cy+Math.sin(a)*r*ring]);
+    h+=`<polygon points="${pts.map(p=>p.join(',')).join(' ')}" fill="none" stroke="#DDE3E9" stroke-width="1"/>`;
+    if(ring<1) h+=`<text x="${cx+5}" y="${cy-r*ring+4}" font-size="8.5" fill="#AAB4BE" font-family="-apple-system,sans-serif">${Math.round(ring*100)}%</text>`;
   });
-  angles.forEach(a=>{html+='<line x1="'+cx+'" y1="'+cy+'" x2="'+(cx+Math.cos(a)*r)+'" y2="'+(cy+Math.sin(a)*r)+'" stroke="#DDE3E9" stroke-width="1"/>';});
-  const dataPts=PILLARS.map((p,i)=>{const ratio=pScore[p.key]/pMax[p.key];return[cx+Math.cos(angles[i])*r*ratio,cy+Math.sin(angles[i])*r*ratio];});
-  html+='<polygon points="'+dataPts.map(p=>p.join(',')).join(' ')+'" fill="#0D7A6E" fill-opacity=".15" stroke="#0D7A6E" stroke-width="2.5" stroke-linejoin="round"/>';
-  dataPts.forEach((pt,i)=>{html+='<circle cx="'+pt[0]+'" cy="'+pt[1]+'" r="5.5" fill="'+PILLARS[i].color+'" stroke="#fff" stroke-width="2"/>';});
-  PILLARS.forEach((p,i)=>{
-    const a=angles[i],lx=cx+Math.cos(a)*(r+24),ly=cy+Math.sin(a)*(r+24);
-    const anchor=lx<cx-10?'end':lx>cx+10?'start':'middle';
-    const pc=Math.round(pScore[p.key]/pMax[p.key]*100);
-    html+='<text x="'+lx+'" y="'+(ly-3)+'" text-anchor="'+anchor+'" font-size="10.5" fill="#4A5A6A" font-family="-apple-system,sans-serif" font-weight="700">'+p.short+'</text>';
-    html+='<text x="'+lx+'" y="'+(ly+11)+'" text-anchor="'+anchor+'" font-size="10" fill="'+p.color+'" font-family="-apple-system,sans-serif" font-weight="800">'+pc+'%</text>';
+  ang.forEach(a=>{h+=`<line x1="${cx}" y1="${cy}" x2="${cx+Math.cos(a)*r}" y2="${cy+Math.sin(a)*r}" stroke="#DDE3E9" stroke-width="1"/>`;});
+  const dp=P.map((p,i)=>{const ratio=ps[p.k]/pm[p.k];return[cx+Math.cos(ang[i])*r*ratio,cy+Math.sin(ang[i])*r*ratio];});
+  h+=`<polygon points="${dp.map(p=>p.join(',')).join(' ')}" fill="#0D7A6E" fill-opacity=".15" stroke="#0D7A6E" stroke-width="2.5" stroke-linejoin="round"/>`;
+  dp.forEach((pt,i)=>{h+=`<circle cx="${pt[0]}" cy="${pt[1]}" r="5.5" fill="${P[i].c}" stroke="#fff" stroke-width="2"/>`;});
+  P.forEach((p,i)=>{
+    const a=ang[i],lx=cx+Math.cos(a)*(r+24),ly=cy+Math.sin(a)*(r+24);
+    const anc=lx<cx-10?'end':lx>cx+10?'start':'middle';
+    const pc=Math.round(ps[p.k]/pm[p.k]*100);
+    h+=`<text x="${lx}" y="${ly-3}" text-anchor="${anc}" font-size="10.5" fill="#4A5A6A" font-family="-apple-system,sans-serif" font-weight="700">${p.sh}</text>`;
+    h+=`<text x="${lx}" y="${ly+11}" text-anchor="${anc}" font-size="10" fill="${p.c}" font-family="-apple-system,sans-serif" font-weight="800">${pc}%</text>`;
   });
-  svg.innerHTML=html;
+  svg.innerHTML=h;
 }
 </script>
 </body>
